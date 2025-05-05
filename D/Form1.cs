@@ -108,7 +108,7 @@ namespace D
                 foreach (var filePath in Directory.GetFiles(folderPath))
                 {
                     // Обчислюємо унікальний хеш для файлу
-                    string fileHash = ComputeFileHash(filePath);
+                    string fileHash = ComputeFileHash(filePath); 
 
                     // Перевіряємо, чи файл вже є в базі даних
                     if (File.Exists(trainingFilePath) && File.ReadAllText(trainingFilePath).Contains(fileHash))
