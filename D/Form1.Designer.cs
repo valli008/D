@@ -30,27 +30,27 @@
         {
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
-            button1 = new Button();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
+            training = new Button();
+            PasswordWord1 = new TextBox();
+            PathToTheFolder = new TextBox();
             label2 = new Label();
             label1 = new Label();
             tabPage2 = new TabPage();
-            button2 = new Button();
-            radioButton2 = new RadioButton();
-            radioButton1 = new RadioButton();
-            textBox3 = new TextBox();
+            selection = new Button();
+            MinimumExecutionTime = new RadioButton();
+            MaximumCompressionRatio = new RadioButton();
+            FilePath1 = new TextBox();
             tabPage3 = new TabPage();
-            textBox5 = new TextBox();
-            textBox4 = new TextBox();
-            button4 = new Button();
-            button3 = new Button();
-            comboBox2 = new ComboBox();
-            comboBox1 = new ComboBox();
-            checkBox4 = new CheckBox();
-            checkBox3 = new CheckBox();
-            checkBox2 = new CheckBox();
-            checkBox1 = new CheckBox();
+            PasswordWord2 = new TextBox();
+            FilePath2 = new TextBox();
+            change = new Button();
+            save = new Button();
+            arkhivuvannya = new ComboBox();
+            shyfruvannya = new ComboBox();
+            unzipping = new CheckBox();
+            archiving = new CheckBox();
+            decoding = new CheckBox();
+            encryption = new CheckBox();
             label6 = new Label();
             label5 = new Label();
             label4 = new Label();
@@ -74,9 +74,9 @@
             // 
             // tabPage1
             // 
-            tabPage1.Controls.Add(button1);
-            tabPage1.Controls.Add(textBox2);
-            tabPage1.Controls.Add(textBox1);
+            tabPage1.Controls.Add(training);
+            tabPage1.Controls.Add(PasswordWord1);
+            tabPage1.Controls.Add(PathToTheFolder);
             tabPage1.Controls.Add(label2);
             tabPage1.Controls.Add(label1);
             tabPage1.Location = new Point(4, 29);
@@ -87,29 +87,29 @@
             tabPage1.Text = "Навчання";
             tabPage1.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // training
             // 
-            button1.Location = new Point(275, 246);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 29);
-            button1.TabIndex = 9;
-            button1.Text = "Навчити";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            training.Location = new Point(275, 246);
+            training.Name = "training";
+            training.Size = new Size(94, 29);
+            training.TabIndex = 9;
+            training.Text = "Навчити";
+            training.UseVisualStyleBackColor = true;
+            training.Click += training_Click;
             // 
-            // textBox2
+            // PasswordWord1
             // 
-            textBox2.Location = new Point(275, 166);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(274, 27);
-            textBox2.TabIndex = 8;
+            PasswordWord1.Location = new Point(275, 166);
+            PasswordWord1.Name = "PasswordWord1";
+            PasswordWord1.Size = new Size(274, 27);
+            PasswordWord1.TabIndex = 8;
             // 
-            // textBox1
+            // PathToTheFolder
             // 
-            textBox1.Location = new Point(275, 77);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(274, 27);
-            textBox1.TabIndex = 7;
+            PathToTheFolder.Location = new Point(275, 77);
+            PathToTheFolder.Name = "PathToTheFolder";
+            PathToTheFolder.Size = new Size(274, 27);
+            PathToTheFolder.TabIndex = 7;
             // 
             // label2
             // 
@@ -131,10 +131,10 @@
             // 
             // tabPage2
             // 
-            tabPage2.Controls.Add(button2);
-            tabPage2.Controls.Add(radioButton2);
-            tabPage2.Controls.Add(radioButton1);
-            tabPage2.Controls.Add(textBox3);
+            tabPage2.Controls.Add(selection);
+            tabPage2.Controls.Add(MinimumExecutionTime);
+            tabPage2.Controls.Add(MaximumCompressionRatio);
+            tabPage2.Controls.Add(FilePath1);
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
@@ -143,57 +143,57 @@
             tabPage2.Text = "Підбір алгоритму";
             tabPage2.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // selection
             // 
-            button2.Location = new Point(316, 283);
-            button2.Name = "button2";
-            button2.Size = new Size(143, 29);
-            button2.TabIndex = 3;
-            button2.Text = "Підібрати";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            selection.Location = new Point(316, 283);
+            selection.Name = "selection";
+            selection.Size = new Size(143, 29);
+            selection.TabIndex = 3;
+            selection.Text = "Підібрати";
+            selection.UseVisualStyleBackColor = true;
+            selection.Click += selection_Click;
             // 
-            // radioButton2
+            // MinimumExecutionTime
             // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(249, 218);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(229, 24);
-            radioButton2.TabIndex = 2;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Мінімальний час виконання";
-            radioButton2.UseVisualStyleBackColor = true;
+            MinimumExecutionTime.AutoSize = true;
+            MinimumExecutionTime.Location = new Point(249, 218);
+            MinimumExecutionTime.Name = "MinimumExecutionTime";
+            MinimumExecutionTime.Size = new Size(229, 24);
+            MinimumExecutionTime.TabIndex = 2;
+            MinimumExecutionTime.TabStop = true;
+            MinimumExecutionTime.Text = "Мінімальний час виконання";
+            MinimumExecutionTime.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // MaximumCompressionRatio
             // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(249, 169);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(289, 24);
-            radioButton1.TabIndex = 1;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Максимальний коєфіціент стиснення";
-            radioButton1.UseVisualStyleBackColor = true;
+            MaximumCompressionRatio.AutoSize = true;
+            MaximumCompressionRatio.Location = new Point(249, 169);
+            MaximumCompressionRatio.Name = "MaximumCompressionRatio";
+            MaximumCompressionRatio.Size = new Size(289, 24);
+            MaximumCompressionRatio.TabIndex = 1;
+            MaximumCompressionRatio.TabStop = true;
+            MaximumCompressionRatio.Text = "Максимальний коєфіціент стиснення";
+            MaximumCompressionRatio.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // FilePath1
             // 
-            textBox3.Location = new Point(249, 111);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(283, 27);
-            textBox3.TabIndex = 0;
+            FilePath1.Location = new Point(249, 111);
+            FilePath1.Name = "FilePath1";
+            FilePath1.Size = new Size(283, 27);
+            FilePath1.TabIndex = 0;
             // 
             // tabPage3
             // 
-            tabPage3.Controls.Add(textBox5);
-            tabPage3.Controls.Add(textBox4);
-            tabPage3.Controls.Add(button4);
-            tabPage3.Controls.Add(button3);
-            tabPage3.Controls.Add(comboBox2);
-            tabPage3.Controls.Add(comboBox1);
-            tabPage3.Controls.Add(checkBox4);
-            tabPage3.Controls.Add(checkBox3);
-            tabPage3.Controls.Add(checkBox2);
-            tabPage3.Controls.Add(checkBox1);
+            tabPage3.Controls.Add(PasswordWord2);
+            tabPage3.Controls.Add(FilePath2);
+            tabPage3.Controls.Add(change);
+            tabPage3.Controls.Add(save);
+            tabPage3.Controls.Add(arkhivuvannya);
+            tabPage3.Controls.Add(shyfruvannya);
+            tabPage3.Controls.Add(unzipping);
+            tabPage3.Controls.Add(archiving);
+            tabPage3.Controls.Add(decoding);
+            tabPage3.Controls.Add(encryption);
             tabPage3.Controls.Add(label6);
             tabPage3.Controls.Add(label5);
             tabPage3.Controls.Add(label4);
@@ -205,95 +205,95 @@
             tabPage3.Text = "Шифрування/архівування";
             tabPage3.UseVisualStyleBackColor = true;
             // 
-            // textBox5
+            // PasswordWord2
             // 
-            textBox5.Location = new Point(200, 126);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(159, 27);
-            textBox5.TabIndex = 13;
+            PasswordWord2.Location = new Point(200, 126);
+            PasswordWord2.Name = "PasswordWord2";
+            PasswordWord2.Size = new Size(159, 27);
+            PasswordWord2.TabIndex = 13;
             // 
-            // textBox4
+            // FilePath2
             // 
-            textBox4.Location = new Point(200, 63);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(159, 27);
-            textBox4.TabIndex = 12;
+            FilePath2.Location = new Point(200, 63);
+            FilePath2.Name = "FilePath2";
+            FilePath2.Size = new Size(159, 27);
+            FilePath2.TabIndex = 12;
             // 
-            // button4
+            // change
             // 
-            button4.Location = new Point(486, 12);
-            button4.Name = "button4";
-            button4.Size = new Size(94, 29);
-            button4.TabIndex = 11;
-            button4.Text = "Змінити";
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
+            change.Location = new Point(486, 12);
+            change.Name = "change";
+            change.Size = new Size(94, 29);
+            change.TabIndex = 11;
+            change.Text = "Змінити";
+            change.UseVisualStyleBackColor = true;
+            change.Click += change_Click;
             // 
-            // button3
+            // save
             // 
-            button3.Location = new Point(511, 246);
-            button3.Name = "button3";
-            button3.Size = new Size(94, 29);
-            button3.TabIndex = 10;
-            button3.Text = "Зберегти";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            save.Location = new Point(511, 246);
+            save.Name = "save";
+            save.Size = new Size(94, 29);
+            save.TabIndex = 10;
+            save.Text = "Зберегти";
+            save.UseVisualStyleBackColor = true;
+            save.Click += save_Click;
             // 
-            // comboBox2
+            // arkhivuvannya
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(620, 178);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(151, 28);
-            comboBox2.TabIndex = 9;
+            arkhivuvannya.FormattingEnabled = true;
+            arkhivuvannya.Location = new Point(620, 178);
+            arkhivuvannya.Name = "arkhivuvannya";
+            arkhivuvannya.Size = new Size(151, 28);
+            arkhivuvannya.TabIndex = 9;
             // 
-            // comboBox1
+            // shyfruvannya
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(387, 178);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
-            comboBox1.TabIndex = 8;
+            shyfruvannya.FormattingEnabled = true;
+            shyfruvannya.Location = new Point(387, 178);
+            shyfruvannya.Name = "shyfruvannya";
+            shyfruvannya.Size = new Size(151, 28);
+            shyfruvannya.TabIndex = 8;
             // 
-            // checkBox4
+            // unzipping
             // 
-            checkBox4.AutoSize = true;
-            checkBox4.Location = new Point(620, 126);
-            checkBox4.Name = "checkBox4";
-            checkBox4.Size = new Size(140, 24);
-            checkBox4.TabIndex = 7;
-            checkBox4.Text = "Розархівування";
-            checkBox4.UseVisualStyleBackColor = true;
+            unzipping.AutoSize = true;
+            unzipping.Location = new Point(620, 126);
+            unzipping.Name = "unzipping";
+            unzipping.Size = new Size(140, 24);
+            unzipping.TabIndex = 7;
+            unzipping.Text = "Розархівування";
+            unzipping.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // archiving
             // 
-            checkBox3.AutoSize = true;
-            checkBox3.Location = new Point(620, 63);
-            checkBox3.Name = "checkBox3";
-            checkBox3.Size = new Size(118, 24);
-            checkBox3.TabIndex = 6;
-            checkBox3.Text = "Архівування";
-            checkBox3.UseVisualStyleBackColor = true;
+            archiving.AutoSize = true;
+            archiving.Location = new Point(620, 63);
+            archiving.Name = "archiving";
+            archiving.Size = new Size(118, 24);
+            archiving.TabIndex = 6;
+            archiving.Text = "Архівування";
+            archiving.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // decoding
             // 
-            checkBox2.AutoSize = true;
-            checkBox2.Location = new Point(387, 126);
-            checkBox2.Name = "checkBox2";
-            checkBox2.Size = new Size(144, 24);
-            checkBox2.TabIndex = 5;
-            checkBox2.Text = "Розшифрування";
-            checkBox2.UseVisualStyleBackColor = true;
+            decoding.AutoSize = true;
+            decoding.Location = new Point(387, 126);
+            decoding.Name = "decoding";
+            decoding.Size = new Size(144, 24);
+            decoding.TabIndex = 5;
+            decoding.Text = "Розшифрування";
+            decoding.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // encryption
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(387, 63);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(122, 24);
-            checkBox1.TabIndex = 4;
-            checkBox1.Text = "Шифрування";
-            checkBox1.UseVisualStyleBackColor = true;
+            encryption.AutoSize = true;
+            encryption.Location = new Point(387, 63);
+            encryption.Name = "encryption";
+            encryption.Size = new Size(122, 24);
+            encryption.TabIndex = 4;
+            encryption.Text = "Шифрування";
+            encryption.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -353,30 +353,30 @@
 
         private TabControl tabControl1;
         private TabPage tabPage1;
-        private Button button1;
-        private TextBox textBox2;
-        private TextBox textBox1;
+        private Button training;
+        private TextBox PasswordWord1;
+        private TextBox PathToTheFolder;
         private Label label2;
         private Label label1;
         private TabPage tabPage2;
-        private Button button2;
-        private RadioButton radioButton2;
-        private RadioButton radioButton1;
-        private TextBox textBox3;
+        private Button selection;
+        private RadioButton MinimumExecutionTime;
+        private RadioButton MaximumCompressionRatio;
+        private TextBox FilePath1;
         private TabPage tabPage3;
-        private CheckBox checkBox4;
-        private CheckBox checkBox3;
-        private CheckBox checkBox2;
-        private CheckBox checkBox1;
+        private CheckBox unzipping;
+        private CheckBox archiving;
+        private CheckBox decoding;
+        private CheckBox encryption;
         private Label label6;
         private Label label5;
         private Label label4;
         private Label label3;
-        private Button button4;
-        private Button button3;
-        private ComboBox comboBox2;
-        private ComboBox comboBox1;
-        private TextBox textBox5;
-        private TextBox textBox4;
+        private Button change;
+        private Button save;
+        private ComboBox arkhivuvannya;
+        private ComboBox shyfruvannya;
+        private TextBox PasswordWord2;
+        private TextBox FilePath2;
     }
 }

@@ -1,5 +1,6 @@
 using D.Compression;
 using D.Encryption;
+using System.Diagnostics;
 
 namespace D
 {
@@ -72,11 +73,11 @@ namespace D
         }
 
         // Обробка кнопки "Навчити"
-        private void button1_Click(object sender, EventArgs e)
+        private void training_Click(object sender, EventArgs e)
         {
             // Отримуємо шлях до папки та пароль від користувача
-            string folderPath = textBox1.Text; // Текстбокс для шляху до папки
-            string password = textBox2.Text;  // Текстбокс для введення пароля
+            string folderPath = PathToTheFolder.Text; // Текстбокс для шляху до папки
+            string password = PasswordWord1.Text;  // Текстбокс для введення пароля
 
             // Перевіряємо, чи існує вказана папка
             if (!Directory.Exists(folderPath))
@@ -133,10 +134,10 @@ namespace D
                             byte[] fileData = File.ReadAllBytes(filePath);
 
                             // Комбінація: спочатку шифрування, потім стиснення
-                            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+                            var start = Stopwatch.GetTimestamp();
                             byte[] encryptedData = encryption.Encrypt(fileData, password);
                             byte[] compressedData = compression.Compress(encryptedData);
-                            stopwatch.Stop();
+                            var elapsed = Stopwatch.GetElapsedTime(start); // отримуємо час, що минув
 
                             // Обчислюємо результати
                             long fileSizeAfter = compressedData.Length;
@@ -179,9 +180,9 @@ namespace D
         }
 
         // Обробка кнопки "Підбір алгоритму"
-        private void button2_Click(object sender, EventArgs e)
+        private void selection_Click(object sender, EventArgs e)
         {
-            string filePath = textBox3.Text;  // Зчитуємо шлях до файлу
+            string filePath = FilePath1.Text;  // Зчитуємо шлях до файлу
 
             // Перевіряємо, чи існує файл
             if (!File.Exists(filePath))
@@ -199,8 +200,8 @@ namespace D
             string[] databaseLines = File.ReadAllLines(trainingFilePath);
 
             // Перевірка вибору критерію (час чи коефіцієнт стиснення)
-            bool isTimeBased = radioButton2.Checked;  // Якщо вибрано час
-            bool isCompressionRatioBased = radioButton1.Checked;  // Якщо вибрано коефіцієнт стиснення
+            bool isTimeBased = MinimumExecutionTime.Checked;  // Якщо вибрано час
+            bool isCompressionRatioBased = MaximumCompressionRatio.Checked;  // Якщо вибрано коефіцієнт стиснення
 
             // Ініціалізація змінної для найкращої комбінації
             double bestScore = double.MaxValue;
@@ -357,13 +358,13 @@ namespace D
             return Math.Min(timeMembership, compressionMembership); // Мінімум для вибору
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void save_Click(object sender, EventArgs e)
         {
             // Зчитуємо шлях до файлу з текстового поля
-            string filePath = textBox4.Text;
+            string filePath = FilePath2.Text;
 
             // Зчитуємо парольну фразу
-            string password = textBox5.Text;
+            string password = PasswordWord2.Text;
 
             // Перевірка: чи введено шлях до файлу
             if (string.IsNullOrWhiteSpace(filePath))
@@ -386,31 +387,31 @@ namespace D
                 byte[] resultData = null; // Змінна для зберігання результату
 
                 // Отримуємо вибраний алгоритм шифрування (якщо обрано)
-                var encryption = (checkBox1.Checked || checkBox2.Checked)
-                    ? encryptionAlgorithms.FirstOrDefault(a => a.Name == comboBox1.SelectedItem?.ToString())
+                var encryption = (this.encryption.Checked || decoding.Checked)
+                    ? encryptionAlgorithms.FirstOrDefault(a => a.Name == shyfruvannya.SelectedItem?.ToString())
                     : null;
 
                 // Отримуємо вибраний алгоритм стиснення (якщо обрано)
-                var compression = (checkBox3.Checked || checkBox4.Checked)
-                    ? compressionAlgorithms.FirstOrDefault(a => a.Name == comboBox2.SelectedItem?.ToString())
+                var compression = (archiving.Checked || unzipping.Checked)
+                    ? compressionAlgorithms.FirstOrDefault(a => a.Name == arkhivuvannya.SelectedItem?.ToString())
                     : null;
 
                 // Перевірка: чи знайдено вибраний алгоритм шифрування
-                if ((checkBox1.Checked || checkBox2.Checked) && encryption == null)
+                if ((this.encryption.Checked || decoding.Checked) && encryption == null)
                 {
                     MessageBox.Show("Не знайдено вибраного алгоритму шифрування.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 // Перевірка: чи знайдено вибраний алгоритм стиснення
-                if ((checkBox3.Checked || checkBox4.Checked) && compression == null)
+                if ((archiving.Checked || unzipping.Checked) && compression == null)
                 {
                     MessageBox.Show("Не знайдено вибраного алгоритму архівування.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 // Виконання обраних дій
-                if (checkBox1.Checked && checkBox3.Checked) // Шифрування + архівування
+                if (this.encryption.Checked && archiving.Checked) // Шифрування + архівування
                 {
                     if (label5.Text == "1") // Спочатку шифрування, потім стиснення
                     {
@@ -423,7 +424,7 @@ namespace D
                         resultData = encryption.Encrypt(resultData, password); // Шифрування
                     }
                 }
-                else if (checkBox2.Checked && checkBox4.Checked) // Розшифрування + розархівування
+                else if (decoding.Checked && unzipping.Checked) // Розшифрування + розархівування
                 {
                     if (label5.Text == "1") // Спочатку розшифрування, потім розархівування
                     {
@@ -436,19 +437,19 @@ namespace D
                         resultData = encryption.Decrypt(resultData, password); // Розшифрування
                     }
                 }
-                else if (checkBox1.Checked) // Тільки шифрування
+                else if (this.encryption.Checked) // Тільки шифрування
                 {
                     resultData = encryption.Encrypt(fileData, password);
                 }
-                else if (checkBox2.Checked) // Тільки розшифрування
+                else if (decoding.Checked) // Тільки розшифрування
                 {
                     resultData = encryption.Decrypt(fileData, password);
                 }
-                else if (checkBox3.Checked) // Тільки стиснення
+                else if (archiving.Checked) // Тільки стиснення
                 {
                     resultData = compression.Compress(fileData);
                 }
-                else if (checkBox4.Checked) // Тільки розархівування
+                else if (unzipping.Checked) // Тільки розархівування
                 {
                     resultData = compression.Decompress(fileData);
                 }
@@ -470,7 +471,7 @@ namespace D
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void change_Click(object sender, EventArgs e)
         {
             // Читаємо значення лейблів
             string label5Text = label5.Text;
