@@ -133,31 +133,33 @@ namespace D
                             // Зчитуємо вміст файлу
                             byte[] fileData = File.ReadAllBytes(filePath);
 
+                            // Ініціалізація stopwatch
+                            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+
                             // Комбінація: спочатку шифрування, потім стиснення
-                            var start = Stopwatch.GetTimestamp();
                             byte[] encryptedData = encryption.Encrypt(fileData, password);
                             byte[] compressedData = compression.Compress(encryptedData);
-                            var elapsed = Stopwatch.GetElapsedTime(start); // отримуємо час, що минув
+                            stopwatch.Stop(); // Зупинка таймера
 
                             // Обчислюємо результати
                             long fileSizeAfter = compressedData.Length;
                             double compressionRatio = (double)fileSizeAfter / fileSizeBefore;
-                            long processingTime = stopwatch.ElapsedMilliseconds;
+                            long processingTime = stopwatch.ElapsedMilliseconds; // Отримуємо час у мілісекундах
 
                             // Записуємо результати у файл бази даних
                             string resultEncryptThenCompress = $"{fileExtension}|{fileSizeBefore}|{encryption.Name} -> {compression.Name}|{fileSizeAfter}|{compressionRatio:F2}|{processingTime} мс";
                             File.AppendAllText(trainingFilePath, resultEncryptThenCompress + Environment.NewLine);
 
                             // Комбінація: спочатку стиснення, потім шифрування
-                            stopwatch.Restart();
+                            stopwatch.Restart(); // Перезапускаємо таймер
                             byte[] compressedDataFirst = compression.Compress(fileData);
                             byte[] encryptedDataAfterCompression = encryption.Encrypt(compressedDataFirst, password);
-                            stopwatch.Stop();
+                            stopwatch.Stop(); // Зупинка таймера
 
                             // Обчислюємо результати
                             fileSizeAfter = encryptedDataAfterCompression.Length;
                             compressionRatio = (double)fileSizeAfter / fileSizeBefore;
-                            processingTime = stopwatch.ElapsedMilliseconds;
+                            processingTime = stopwatch.ElapsedMilliseconds; // Отримуємо час у мілісекундах
 
                             // Записуємо результати у файл бази даних
                             string resultCompressThenEncrypt = $"{fileExtension}|{fileSizeBefore}|{compression.Name} -> {encryption.Name}|{fileSizeAfter}|{compressionRatio:F2}|{processingTime} мс";
