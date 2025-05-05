@@ -6,15 +6,15 @@ namespace D
 {
     public partial class Form1 : Form
     {
-        // Ваги критеріїв для різних типів файлів: (вагаЧасу, вагаСтиснення)
+        // Р’Р°РіРё РєСЂРёС‚РµСЂС–С—РІ РґР»СЏ СЂС–Р·РЅРёС… С‚РёРїС–РІ С„Р°Р№Р»С–РІ: (РІР°РіР°Р§Р°СЃСѓ, РІР°РіР°РЎС‚РёСЃРЅРµРЅРЅСЏ)
         private Dictionary<string, (double timeWeight, double compressionWeight)> fileTypeWeights = new Dictionary<string, (double, double)>
         {
-            { ".txt", (0.3, 0.7) },      // Текст — головне стиснення
-            { ".jpg", (0.7, 0.3) },      // Зображення — головне швидкість
+            { ".txt", (0.3, 0.7) },      // РўРµРєСЃС‚ вЂ” РіРѕР»РѕРІРЅРµ СЃС‚РёСЃРЅРµРЅРЅСЏ
+            { ".jpg", (0.7, 0.3) },      // Р—РѕР±СЂР°Р¶РµРЅРЅСЏ вЂ” РіРѕР»РѕРІРЅРµ С€РІРёРґРєС–СЃС‚СЊ
             { ".jpeg", (0.7, 0.3) },
-            { ".pdf", (0.5, 0.5) },      // Баланс
-            { ".png", (0.6, 0.4) },      // Трохи більше часу
-            { ".docx", (0.4, 0.6) }      // Змішаний, але важливе стиснення
+            { ".pdf", (0.5, 0.5) },      // Р‘Р°Р»Р°РЅСЃ
+            { ".png", (0.6, 0.4) },      // РўСЂРѕС…Рё Р±С–Р»СЊС€Рµ С‡Р°СЃСѓ
+            { ".docx", (0.4, 0.6) }      // Р—РјС–С€Р°РЅРёР№, Р°Р»Рµ РІР°Р¶Р»РёРІРµ СЃС‚РёСЃРЅРµРЅРЅСЏ
         };
 
         public Form1()
@@ -22,7 +22,7 @@ namespace D
             InitializeComponent();
         }
 
-        // Ініціалізація списків доступних алгоритмів
+        // Р†РЅС–С†С–Р°Р»С–Р·Р°С†С–СЏ СЃРїРёСЃРєС–РІ РґРѕСЃС‚СѓРїРЅРёС… Р°Р»РіРѕСЂРёС‚РјС–РІ
         private readonly List<IEncryptionAlgorithm> encryptionAlgorithms = new List<IEncryptionAlgorithm>
         {
             new AESEncryption(),
@@ -41,14 +41,14 @@ namespace D
             new PPMCompression()
         };
 
-        // Метод для перевірки доступу до директорії для запису
+        // РњРµС‚РѕРґ РґР»СЏ РїРµСЂРµРІС–СЂРєРё РґРѕСЃС‚СѓРїСѓ РґРѕ РґРёСЂРµРєС‚РѕСЂС–С— РґР»СЏ Р·Р°РїРёСЃСѓ
         private bool HasWriteAccess(string directoryPath)
         {
             try
             {
                 string testFilePath = Path.Combine(directoryPath, "test.txt");
 
-                // Спробуємо створити і записати тестовий файл
+                // РЎРїСЂРѕР±СѓС”РјРѕ СЃС‚РІРѕСЂРёС‚Рё С– Р·Р°РїРёСЃР°С‚Рё С‚РµСЃС‚РѕРІРёР№ С„Р°Р№Р»
                 File.WriteAllText(testFilePath, "test");
                 File.Delete(testFilePath);
                 return true;
@@ -59,7 +59,7 @@ namespace D
             }
         }
 
-        // Метод для обчислення унікального хешу файлу
+        // РњРµС‚РѕРґ РґР»СЏ РѕР±С‡РёСЃР»РµРЅРЅСЏ СѓРЅС–РєР°Р»СЊРЅРѕРіРѕ С…РµС€Сѓ С„Р°Р№Р»Сѓ
         private string ComputeFileHash(string filePath)
         {
             using (var sha256 = System.Security.Cryptography.SHA256.Create())
@@ -72,182 +72,182 @@ namespace D
             }
         }
 
-        // Обробка кнопки "Навчити"
+        // РћР±СЂРѕР±РєР° РєРЅРѕРїРєРё "РќР°РІС‡РёС‚Рё"
         private void training_Click(object sender, EventArgs e)
         {
-            // Отримуємо шлях до папки та пароль від користувача
-            string folderPath = PathToTheFolder.Text; // Текстбокс для шляху до папки
-            string password = PasswordWord1.Text;  // Текстбокс для введення пароля
+            // РћС‚СЂРёРјСѓС”РјРѕ С€Р»СЏС… РґРѕ РїР°РїРєРё С‚Р° РїР°СЂРѕР»СЊ РІС–Рґ РєРѕСЂРёСЃС‚СѓРІР°С‡Р°
+            string folderPath = PathToTheFolder.Text; // РўРµРєСЃС‚Р±РѕРєСЃ РґР»СЏ С€Р»СЏС…Сѓ РґРѕ РїР°РїРєРё
+            string password = PasswordWord1.Text;  // РўРµРєСЃС‚Р±РѕРєСЃ РґР»СЏ РІРІРµРґРµРЅРЅСЏ РїР°СЂРѕР»СЏ
 
-            // Перевіряємо, чи існує вказана папка
+            // РџРµСЂРµРІС–СЂСЏС”РјРѕ, С‡Рё С–СЃРЅСѓС” РІРєР°Р·Р°РЅР° РїР°РїРєР°
             if (!Directory.Exists(folderPath))
             {
-                MessageBox.Show("Папку не знайдено. Введіть коректний шлях.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("РџР°РїРєСѓ РЅРµ Р·РЅР°Р№РґРµРЅРѕ. Р’РІРµРґС–С‚СЊ РєРѕСЂРµРєС‚РЅРёР№ С€Р»СЏС….", "РџРѕРјРёР»РєР°", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Вказуємо шлях до файлу бази даних для запису результатів навчання
+            // Р’РєР°Р·СѓС”РјРѕ С€Р»СЏС… РґРѕ С„Р°Р№Р»Сѓ Р±Р°Р·Рё РґР°РЅРёС… РґР»СЏ Р·Р°РїРёСЃСѓ СЂРµР·СѓР»СЊС‚Р°С‚С–РІ РЅР°РІС‡Р°РЅРЅСЏ
             string trainingFilePath = Path.Combine(Directory.GetCurrentDirectory(), "results_database.txt");
 
             try
             {
-                // Перевірка доступу до директорії
+                // РџРµСЂРµРІС–СЂРєР° РґРѕСЃС‚СѓРїСѓ РґРѕ РґРёСЂРµРєС‚РѕСЂС–С—
                 string directoryPath = Path.GetDirectoryName(trainingFilePath);
                 if (!Directory.Exists(directoryPath) || !HasWriteAccess(directoryPath))
                 {
-                    MessageBox.Show("Немає прав на запис у директорію. Перевірте права доступу.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("РќРµРјР°С” РїСЂР°РІ РЅР° Р·Р°РїРёСЃ Сѓ РґРёСЂРµРєС‚РѕСЂС–СЋ. РџРµСЂРµРІС–СЂС‚Рµ РїСЂР°РІР° РґРѕСЃС‚СѓРїСѓ.", "РџРѕРјРёР»РєР°", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                // Перевірка чи існує файл і створення, якщо не існує
+                // РџРµСЂРµРІС–СЂРєР° С‡Рё С–СЃРЅСѓС” С„Р°Р№Р» С– СЃС‚РІРѕСЂРµРЅРЅСЏ, СЏРєС‰Рѕ РЅРµ С–СЃРЅСѓС”
                 if (!File.Exists(trainingFilePath))
                 {
-                    File.Create(trainingFilePath).Close(); // Створення і закриття файлу
+                    File.Create(trainingFilePath).Close(); // РЎС‚РІРѕСЂРµРЅРЅСЏ С– Р·Р°РєСЂРёС‚С‚СЏ С„Р°Р№Р»Сѓ
                 }
 
-                // Аналізуємо всі файли в папці
+                // РђРЅР°Р»С–Р·СѓС”РјРѕ РІСЃС– С„Р°Р№Р»Рё РІ РїР°РїС†С–
                 foreach (var filePath in Directory.GetFiles(folderPath))
                 {
-                    // Обчислюємо унікальний хеш для файлу
+                    // РћР±С‡РёСЃР»СЋС”РјРѕ СѓРЅС–РєР°Р»СЊРЅРёР№ С…РµС€ РґР»СЏ С„Р°Р№Р»Сѓ
                     string fileHash = ComputeFileHash(filePath); 
 
-                    // Перевіряємо, чи файл вже є в базі даних
+                    // РџРµСЂРµРІС–СЂСЏС”РјРѕ, С‡Рё С„Р°Р№Р» РІР¶Рµ С” РІ Р±Р°Р·С– РґР°РЅРёС…
                     if (File.Exists(trainingFilePath) && File.ReadAllText(trainingFilePath).Contains(fileHash))
                     {
-                        continue; // Пропускаємо обробку, якщо файл уже проаналізовано
+                        continue; // РџСЂРѕРїСѓСЃРєР°С”РјРѕ РѕР±СЂРѕР±РєСѓ, СЏРєС‰Рѕ С„Р°Р№Р» СѓР¶Рµ РїСЂРѕР°РЅР°Р»С–Р·РѕРІР°РЅРѕ
                     }
 
-                    // Збираємо базову інформацію про файл
+                    // Р—Р±РёСЂР°С”РјРѕ Р±Р°Р·РѕРІСѓ С–РЅС„РѕСЂРјР°С†С–СЋ РїСЂРѕ С„Р°Р№Р»
                     var fileInfo = new FileInfo(filePath);
-                    string fileExtension = fileInfo.Extension; // Розширення файлу
-                    long fileSizeBefore = fileInfo.Length;      // Розмір до обробки
+                    string fileExtension = fileInfo.Extension; // Р РѕР·С€РёСЂРµРЅРЅСЏ С„Р°Р№Р»Сѓ
+                    long fileSizeBefore = fileInfo.Length;      // Р РѕР·РјС–СЂ РґРѕ РѕР±СЂРѕР±РєРё
 
-                    // Додаємо хеш файлу у файл бази даних
+                    // Р”РѕРґР°С”РјРѕ С…РµС€ С„Р°Р№Р»Сѓ Сѓ С„Р°Р№Р» Р±Р°Р·Рё РґР°РЅРёС…
                     File.AppendAllText(trainingFilePath, $"#{fileHash}{Environment.NewLine}");
 
-                    // Перебираємо всі комбінації алгоритмів шифрування і стиснення
+                    // РџРµСЂРµР±РёСЂР°С”РјРѕ РІСЃС– РєРѕРјР±С–РЅР°С†С–С— Р°Р»РіРѕСЂРёС‚РјС–РІ С€РёС„СЂСѓРІР°РЅРЅСЏ С– СЃС‚РёСЃРЅРµРЅРЅСЏ
                     foreach (var encryption in encryptionAlgorithms)
                     {
                         foreach (var compression in compressionAlgorithms)
                         {
-                            // Зчитуємо вміст файлу
+                            // Р—С‡РёС‚СѓС”РјРѕ РІРјС–СЃС‚ С„Р°Р№Р»Сѓ
                             byte[] fileData = File.ReadAllBytes(filePath);
 
-                            // Ініціалізація stopwatch
+                            // Р†РЅС–С†С–Р°Р»С–Р·Р°С†С–СЏ stopwatch
                             var stopwatch = System.Diagnostics.Stopwatch.StartNew();
 
-                            // Комбінація: спочатку шифрування, потім стиснення
+                            // РљРѕРјР±С–РЅР°С†С–СЏ: СЃРїРѕС‡Р°С‚РєСѓ С€РёС„СЂСѓРІР°РЅРЅСЏ, РїРѕС‚С–Рј СЃС‚РёСЃРЅРµРЅРЅСЏ
                             byte[] encryptedData = encryption.Encrypt(fileData, password);
                             byte[] compressedData = compression.Compress(encryptedData);
-                            stopwatch.Stop(); // Зупинка таймера
+                            stopwatch.Stop(); // Р—СѓРїРёРЅРєР° С‚Р°Р№РјРµСЂР°
 
-                            // Обчислюємо результати
+                            // РћР±С‡РёСЃР»СЋС”РјРѕ СЂРµР·СѓР»СЊС‚Р°С‚Рё
                             long fileSizeAfter = compressedData.Length;
                             double compressionRatio = (double)fileSizeAfter / fileSizeBefore;
-                            long processingTime = stopwatch.ElapsedMilliseconds; // Отримуємо час у мілісекундах
+                            long processingTime = stopwatch.ElapsedMilliseconds; // РћС‚СЂРёРјСѓС”РјРѕ С‡Р°СЃ Сѓ РјС–Р»С–СЃРµРєСѓРЅРґР°С…
 
-                            // Записуємо результати у файл бази даних
-                            string resultEncryptThenCompress = $"{fileExtension}|{fileSizeBefore}|{encryption.Name} -> {compression.Name}|{fileSizeAfter}|{compressionRatio:F2}|{processingTime} мс";
+                            // Р—Р°РїРёСЃСѓС”РјРѕ СЂРµР·СѓР»СЊС‚Р°С‚Рё Сѓ С„Р°Р№Р» Р±Р°Р·Рё РґР°РЅРёС…
+                            string resultEncryptThenCompress = $"{fileExtension}|{fileSizeBefore}|{encryption.Name} -> {compression.Name}|{fileSizeAfter}|{compressionRatio:F2}|{processingTime} РјСЃ";
                             File.AppendAllText(trainingFilePath, resultEncryptThenCompress + Environment.NewLine);
 
-                            // Комбінація: спочатку стиснення, потім шифрування
-                            stopwatch.Restart(); // Перезапускаємо таймер
+                            // РљРѕРјР±С–РЅР°С†С–СЏ: СЃРїРѕС‡Р°С‚РєСѓ СЃС‚РёСЃРЅРµРЅРЅСЏ, РїРѕС‚С–Рј С€РёС„СЂСѓРІР°РЅРЅСЏ
+                            stopwatch.Restart(); // РџРµСЂРµР·Р°РїСѓСЃРєР°С”РјРѕ С‚Р°Р№РјРµСЂ
                             byte[] compressedDataFirst = compression.Compress(fileData);
                             byte[] encryptedDataAfterCompression = encryption.Encrypt(compressedDataFirst, password);
-                            stopwatch.Stop(); // Зупинка таймера
+                            stopwatch.Stop(); // Р—СѓРїРёРЅРєР° С‚Р°Р№РјРµСЂР°
 
-                            // Обчислюємо результати
+                            // РћР±С‡РёСЃР»СЋС”РјРѕ СЂРµР·СѓР»СЊС‚Р°С‚Рё
                             fileSizeAfter = encryptedDataAfterCompression.Length;
                             compressionRatio = (double)fileSizeAfter / fileSizeBefore;
-                            processingTime = stopwatch.ElapsedMilliseconds; // Отримуємо час у мілісекундах
+                            processingTime = stopwatch.ElapsedMilliseconds; // РћС‚СЂРёРјСѓС”РјРѕ С‡Р°СЃ Сѓ РјС–Р»С–СЃРµРєСѓРЅРґР°С…
 
-                            // Записуємо результати у файл бази даних
-                            string resultCompressThenEncrypt = $"{fileExtension}|{fileSizeBefore}|{compression.Name} -> {encryption.Name}|{fileSizeAfter}|{compressionRatio:F2}|{processingTime} мс";
+                            // Р—Р°РїРёСЃСѓС”РјРѕ СЂРµР·СѓР»СЊС‚Р°С‚Рё Сѓ С„Р°Р№Р» Р±Р°Р·Рё РґР°РЅРёС…
+                            string resultCompressThenEncrypt = $"{fileExtension}|{fileSizeBefore}|{compression.Name} -> {encryption.Name}|{fileSizeAfter}|{compressionRatio:F2}|{processingTime} РјСЃ";
                             File.AppendAllText(trainingFilePath, resultCompressThenEncrypt + Environment.NewLine);
                         }
                     }
                 }
 
-                // Повідомляємо користувача про завершення процесу навчання
-                MessageBox.Show("Навчання завершено!", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // РџРѕРІС–РґРѕРјР»СЏС”РјРѕ РєРѕСЂРёСЃС‚СѓРІР°С‡Р° РїСЂРѕ Р·Р°РІРµСЂС€РµРЅРЅСЏ РїСЂРѕС†РµСЃСѓ РЅР°РІС‡Р°РЅРЅСЏ
+                MessageBox.Show("РќР°РІС‡Р°РЅРЅСЏ Р·Р°РІРµСЂС€РµРЅРѕ!", "РЈСЃРїС–С…", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (UnauthorizedAccessException)
             {
-                MessageBox.Show("Немає прав для створення або запису в файл. Перевірте права доступу.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("РќРµРјР°С” РїСЂР°РІ РґР»СЏ СЃС‚РІРѕСЂРµРЅРЅСЏ Р°Р±Рѕ Р·Р°РїРёСЃСѓ РІ С„Р°Р№Р». РџРµСЂРµРІС–СЂС‚Рµ РїСЂР°РІР° РґРѕСЃС‚СѓРїСѓ.", "РџРѕРјРёР»РєР°", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Помилка при навчанні: {ex.Message}", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"РџРѕРјРёР»РєР° РїСЂРё РЅР°РІС‡Р°РЅРЅС–: {ex.Message}", "РџРѕРјРёР»РєР°", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        // Обробка кнопки "Підбір алгоритму"
+        // РћР±СЂРѕР±РєР° РєРЅРѕРїРєРё "РџС–РґР±С–СЂ Р°Р»РіРѕСЂРёС‚РјСѓ"
         private void selection_Click(object sender, EventArgs e)
         {
-            string filePath = FilePath1.Text;  // Зчитуємо шлях до файлу
+            string filePath = FilePath1.Text;  // Р—С‡РёС‚СѓС”РјРѕ С€Р»СЏС… РґРѕ С„Р°Р№Р»Сѓ
 
-            // Перевіряємо, чи існує файл
+            // РџРµСЂРµРІС–СЂСЏС”РјРѕ, С‡Рё С–СЃРЅСѓС” С„Р°Р№Р»
             if (!File.Exists(filePath))
             {
-                MessageBox.Show("Файл не знайдено. Введіть коректний шлях.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Р¤Р°Р№Р» РЅРµ Р·РЅР°Р№РґРµРЅРѕ. Р’РІРµРґС–С‚СЊ РєРѕСЂРµРєС‚РЅРёР№ С€Р»СЏС….", "РџРѕРјРёР»РєР°", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Отримуємо розмір файлу для підбору
+            // РћС‚СЂРёРјСѓС”РјРѕ СЂРѕР·РјС–СЂ С„Р°Р№Р»Сѓ РґР»СЏ РїС–РґР±РѕСЂСѓ
             FileInfo fileInfo = new FileInfo(filePath);
             long selectedFileSize = fileInfo.Length;
 
-            // Читаємо базу даних результатів навчання
+            // Р§РёС‚Р°С”РјРѕ Р±Р°Р·Сѓ РґР°РЅРёС… СЂРµР·СѓР»СЊС‚Р°С‚С–РІ РЅР°РІС‡Р°РЅРЅСЏ
             string trainingFilePath = Path.Combine(Directory.GetCurrentDirectory(), "results_database.txt");
             string[] databaseLines = File.ReadAllLines(trainingFilePath);
 
-            // Перевірка вибору критерію (час чи коефіцієнт стиснення)
-            bool isTimeBased = MinimumExecutionTime.Checked;  // Якщо вибрано час
-            bool isCompressionRatioBased = MaximumCompressionRatio.Checked;  // Якщо вибрано коефіцієнт стиснення
+            // РџРµСЂРµРІС–СЂРєР° РІРёР±РѕСЂСѓ РєСЂРёС‚РµСЂС–СЋ (С‡Р°СЃ С‡Рё РєРѕРµС„С–С†С–С”РЅС‚ СЃС‚РёСЃРЅРµРЅРЅСЏ)
+            bool isTimeBased = MinimumExecutionTime.Checked;  // РЇРєС‰Рѕ РІРёР±СЂР°РЅРѕ С‡Р°СЃ
+            bool isCompressionRatioBased = MaximumCompressionRatio.Checked;  // РЇРєС‰Рѕ РІРёР±СЂР°РЅРѕ РєРѕРµС„С–С†С–С”РЅС‚ СЃС‚РёСЃРЅРµРЅРЅСЏ
 
-            // Ініціалізація змінної для найкращої комбінації
+            // Р†РЅС–С†С–Р°Р»С–Р·Р°С†С–СЏ Р·РјС–РЅРЅРѕС— РґР»СЏ РЅР°Р№РєСЂР°С‰РѕС— РєРѕРјР±С–РЅР°С†С–С—
             double bestScore = double.MaxValue;
             string bestCombination = string.Empty;
 
-            // Збираємо дані для таблиці
+            // Р—Р±РёСЂР°С”РјРѕ РґР°РЅС– РґР»СЏ С‚Р°Р±Р»РёС†С–
             List<string[]> tableData = new List<string[]>();
 
-            // Сегментуємо результати навчання за розміром файлів
+            // РЎРµРіРјРµРЅС‚СѓС”РјРѕ СЂРµР·СѓР»СЊС‚Р°С‚Рё РЅР°РІС‡Р°РЅРЅСЏ Р·Р° СЂРѕР·РјС–СЂРѕРј С„Р°Р№Р»С–РІ
             var groupedResults = GroupResultsByFileSize(databaseLines);
 
-            // Знаходимо групу для поточного файлу
+            // Р—РЅР°С…РѕРґРёРјРѕ РіСЂСѓРїСѓ РґР»СЏ РїРѕС‚РѕС‡РЅРѕРіРѕ С„Р°Р№Р»Сѓ
             var relevantGroup = GetRelevantGroup(groupedResults, selectedFileSize);
 
-            // Обчислюємо середні значення для кожної групи
-            double averageProcessingTime = relevantGroup.Average(r => long.Parse(r.Split('|')[5].Replace(" мс", "")));
+            // РћР±С‡РёСЃР»СЋС”РјРѕ СЃРµСЂРµРґРЅС– Р·РЅР°С‡РµРЅРЅСЏ РґР»СЏ РєРѕР¶РЅРѕС— РіСЂСѓРїРё
+            double averageProcessingTime = relevantGroup.Average(r => long.Parse(r.Split('|')[5].Replace(" РјСЃ", "")));
             double averageCompressionRatio = relevantGroup.Average(r => double.Parse(r.Split('|')[4]));
 
-            // Перебираємо всі записи у вибраній групі результатів
+            // РџРµСЂРµР±РёСЂР°С”РјРѕ РІСЃС– Р·Р°РїРёСЃРё Сѓ РІРёР±СЂР°РЅС–Р№ РіСЂСѓРїС– СЂРµР·СѓР»СЊС‚Р°С‚С–РІ
             foreach (var line in relevantGroup)
             {
                 var parts = line.Split('|');
                 string fileExtension = parts[0];
                 string encryptionAlgorithm = parts[2];
                 string compressionAlgorithm = parts[3];
-                double processingTime = long.Parse(parts[5].Replace(" мс", ""));
+                double processingTime = long.Parse(parts[5].Replace(" РјСЃ", ""));
                 double compressionRatio = double.Parse(parts[4]);
 
-                // Нечітка фазифікація для часу виконання (Швидкий, Середній, Повільний)
+                // РќРµС‡С–С‚РєР° С„Р°Р·РёС„С–РєР°С†С–СЏ РґР»СЏ С‡Р°СЃСѓ РІРёРєРѕРЅР°РЅРЅСЏ (РЁРІРёРґРєРёР№, РЎРµСЂРµРґРЅС–Р№, РџРѕРІС–Р»СЊРЅРёР№)
                 double timeMembership = GetTimeMembership(processingTime);
 
-                // Нечітка фазифікація для коефіцієнта стиснення (Високий, Середній, Низький)
+                // РќРµС‡С–С‚РєР° С„Р°Р·РёС„С–РєР°С†С–СЏ РґР»СЏ РєРѕРµС„С–С†С–С”РЅС‚Р° СЃС‚РёСЃРЅРµРЅРЅСЏ (Р’РёСЃРѕРєРёР№, РЎРµСЂРµРґРЅС–Р№, РќРёР·СЊРєРёР№)
                 double compressionMembership = GetCompressionMembership(compressionRatio);
 
-                // Використовуємо нечітку логіку для розрахунку результату
-                // Отримання ваг на основі типу файлу
+                // Р’РёРєРѕСЂРёСЃС‚РѕРІСѓС”РјРѕ РЅРµС‡С–С‚РєСѓ Р»РѕРіС–РєСѓ РґР»СЏ СЂРѕР·СЂР°С…СѓРЅРєСѓ СЂРµР·СѓР»СЊС‚Р°С‚Сѓ
+                // РћС‚СЂРёРјР°РЅРЅСЏ РІР°Рі РЅР° РѕСЃРЅРѕРІС– С‚РёРїСѓ С„Р°Р№Р»Сѓ
                 string ext = fileExtension.Trim().ToLower();
-                var weights = fileTypeWeights.ContainsKey(ext) ? fileTypeWeights[ext] : (0.5, 0.5); // Стандарт: баланс
+                var weights = fileTypeWeights.ContainsKey(ext) ? fileTypeWeights[ext] : (0.5, 0.5); // РЎС‚Р°РЅРґР°СЂС‚: Р±Р°Р»Р°РЅСЃ
 
-                // Комбінування значень з урахуванням ваг
+                // РљРѕРјР±С–РЅСѓРІР°РЅРЅСЏ Р·РЅР°С‡РµРЅСЊ Р· СѓСЂР°С…СѓРІР°РЅРЅСЏРј РІР°Рі
                 var (timeWeight, compressionWeight) = weights;
                 double score = timeWeight * timeMembership + compressionWeight * compressionMembership;
 
-                // Пошук найкращої комбінації
+                // РџРѕС€СѓРє РЅР°Р№РєСЂР°С‰РѕС— РєРѕРјР±С–РЅР°С†С–С—
                 if (score < bestScore)
                 {
                     bestScore = score;
@@ -255,10 +255,10 @@ namespace D
                 }
 
                 string scoreDisplay = isTimeBased
-                    ? $"{processingTime} мс"
+                    ? $"{processingTime} РјСЃ"
                     : $"{compressionRatio:F2}";
 
-                // Додаємо до таблиці
+                // Р”РѕРґР°С”РјРѕ РґРѕ С‚Р°Р±Р»РёС†С–
                 tableData.Add(new string[]
                 {
                     fileExtension,
@@ -268,20 +268,20 @@ namespace D
                 });
             }
 
-            // Створення таблиці для відображення результатів
+            // РЎС‚РІРѕСЂРµРЅРЅСЏ С‚Р°Р±Р»РёС†С– РґР»СЏ РІС–РґРѕР±СЂР°Р¶РµРЅРЅСЏ СЂРµР·СѓР»СЊС‚Р°С‚С–РІ
             DataGridView resultsTable = new DataGridView();
             resultsTable.DataSource = tableData.Select(row => new { FileExtension = row[0], Encryption = row[1], Compression = row[2], Score = row[3] }).ToList();
             resultsTable.Dock = DockStyle.Fill;
 
-            // Виведення таблиці і найкращої комбінації
+            // Р’РёРІРµРґРµРЅРЅСЏ С‚Р°Р±Р»РёС†С– С– РЅР°Р№РєСЂР°С‰РѕС— РєРѕРјР±С–РЅР°С†С–С—
             Form resultForm = new Form();
-            resultForm.Text = "Результати підбору";
+            resultForm.Text = "Р РµР·СѓР»СЊС‚Р°С‚Рё РїС–РґР±РѕСЂСѓ";
             resultForm.Controls.Add(resultsTable);
 
-            // Виведення найкращої комбінації
+            // Р’РёРІРµРґРµРЅРЅСЏ РЅР°Р№РєСЂР°С‰РѕС— РєРѕРјР±С–РЅР°С†С–С—
             Label bestCombinationLabel = new Label
             {
-                Text = $"Найкраща комбінація: {bestCombination}",
+                Text = $"РќР°Р№РєСЂР°С‰Р° РєРѕРјР±С–РЅР°С†С–СЏ: {bestCombination}",
                 Dock = DockStyle.Bottom,
                 TextAlign = ContentAlignment.MiddleCenter
             };
@@ -290,7 +290,7 @@ namespace D
             resultForm.Show();
         }
                 
-        // Функція для групування результатів за розміром файлів
+        // Р¤СѓРЅРєС†С–СЏ РґР»СЏ РіСЂСѓРїСѓРІР°РЅРЅСЏ СЂРµР·СѓР»СЊС‚Р°С‚С–РІ Р·Р° СЂРѕР·РјС–СЂРѕРј С„Р°Р№Р»С–РІ
         private Dictionary<string, List<string>> GroupResultsByFileSize(string[] databaseLines)
         {
             var groupedResults = new Dictionary<string, List<string>>();
@@ -302,7 +302,7 @@ namespace D
                 var parts = line.Split('|');
                 long fileSize = long.Parse(parts[1]);
 
-                string group = fileSize < 1048576 ? "Small" : fileSize < 10485760 ? "Medium" : "Large"; // Розміри в байтах
+                string group = fileSize < 1048576 ? "Small" : fileSize < 10485760 ? "Medium" : "Large"; // Р РѕР·РјС–СЂРё РІ Р±Р°Р№С‚Р°С…
 
                 if (!groupedResults.ContainsKey(group))
                 {
@@ -315,7 +315,7 @@ namespace D
             return groupedResults;
         }
 
-        // Функція для вибору відповідної групи результатів на основі розміру файлу
+        // Р¤СѓРЅРєС†С–СЏ РґР»СЏ РІРёР±РѕСЂСѓ РІС–РґРїРѕРІС–РґРЅРѕС— РіСЂСѓРїРё СЂРµР·СѓР»СЊС‚Р°С‚С–РІ РЅР° РѕСЃРЅРѕРІС– СЂРѕР·РјС–СЂСѓ С„Р°Р№Р»Сѓ
         private List<string> GetRelevantGroup(Dictionary<string, List<string>> groupedResults, long fileSize)
         {
             if (fileSize < 1048576)
@@ -332,154 +332,154 @@ namespace D
             }
         }
 
-        // Оцінка ступеня належності для часу
+        // РћС†С–РЅРєР° СЃС‚СѓРїРµРЅСЏ РЅР°Р»РµР¶РЅРѕСЃС‚С– РґР»СЏ С‡Р°СЃСѓ
         private double GetTimeMembership(double time)
         {
             if (time <= 10)
-                return 1.0;  // Швидкий
+                return 1.0;  // РЁРІРёРґРєРёР№
             if (time <= 50)
-                return (50 - time) / 40.0;  // Середній
-            return 0.0;  // Повільний
+                return (50 - time) / 40.0;  // РЎРµСЂРµРґРЅС–Р№
+            return 0.0;  // РџРѕРІС–Р»СЊРЅРёР№
         }
 
-        // Оцінка ступеня належності для коефіцієнта стиснення
+        // РћС†С–РЅРєР° СЃС‚СѓРїРµРЅСЏ РЅР°Р»РµР¶РЅРѕСЃС‚С– РґР»СЏ РєРѕРµС„С–С†С–С”РЅС‚Р° СЃС‚РёСЃРЅРµРЅРЅСЏ
         private double GetCompressionMembership(double ratio)
         {
             if (ratio >= 0.5)
-                return 1.0;  // Високий коефіцієнт
+                return 1.0;  // Р’РёСЃРѕРєРёР№ РєРѕРµС„С–С†С–С”РЅС‚
             if (ratio >= 0.3)
-                return (0.5 - ratio) / 0.2;  // Середній коефіцієнт
-            return 0.0;  // Низький коефіцієнт
+                return (0.5 - ratio) / 0.2;  // РЎРµСЂРµРґРЅС–Р№ РєРѕРµС„С–С†С–С”РЅС‚
+            return 0.0;  // РќРёР·СЊРєРёР№ РєРѕРµС„С–С†С–С”РЅС‚
         }
 
-        // Нечіткі правила для комбінування часу і стиснення
+        // РќРµС‡С–С‚РєС– РїСЂР°РІРёР»Р° РґР»СЏ РєРѕРјР±С–РЅСѓРІР°РЅРЅСЏ С‡Р°СЃСѓ С– СЃС‚РёСЃРЅРµРЅРЅСЏ
         private double ApplyFuzzyRules(double timeMembership, double compressionMembership)
         {
-            // Приклад комбінування:
-            // Якщо час швидкий і коефіцієнт стиснення високий, то комбінуємо ці фактори для вибору
-            return Math.Min(timeMembership, compressionMembership); // Мінімум для вибору
+            // РџСЂРёРєР»Р°Рґ РєРѕРјР±С–РЅСѓРІР°РЅРЅСЏ:
+            // РЇРєС‰Рѕ С‡Р°СЃ С€РІРёРґРєРёР№ С– РєРѕРµС„С–С†С–С”РЅС‚ СЃС‚РёСЃРЅРµРЅРЅСЏ РІРёСЃРѕРєРёР№, С‚Рѕ РєРѕРјР±С–РЅСѓС”РјРѕ С†С– С„Р°РєС‚РѕСЂРё РґР»СЏ РІРёР±РѕСЂСѓ
+            return Math.Min(timeMembership, compressionMembership); // РњС–РЅС–РјСѓРј РґР»СЏ РІРёР±РѕСЂСѓ
         }
 
         private void save_Click(object sender, EventArgs e)
         {
-            // Зчитуємо шлях до файлу з текстового поля
+            // Р—С‡РёС‚СѓС”РјРѕ С€Р»СЏС… РґРѕ С„Р°Р№Р»Сѓ Р· С‚РµРєСЃС‚РѕРІРѕРіРѕ РїРѕР»СЏ
             string filePath = FilePath2.Text;
 
-            // Зчитуємо парольну фразу
+            // Р—С‡РёС‚СѓС”РјРѕ РїР°СЂРѕР»СЊРЅСѓ С„СЂР°Р·Сѓ
             string password = PasswordWord2.Text;
 
-            // Перевірка: чи введено шлях до файлу
+            // РџРµСЂРµРІС–СЂРєР°: С‡Рё РІРІРµРґРµРЅРѕ С€Р»СЏС… РґРѕ С„Р°Р№Р»Сѓ
             if (string.IsNullOrWhiteSpace(filePath))
             {
-                MessageBox.Show("Шлях до файлу не може бути порожнім.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("РЁР»СЏС… РґРѕ С„Р°Р№Р»Сѓ РЅРµ РјРѕР¶Рµ Р±СѓС‚Рё РїРѕСЂРѕР¶РЅС–Рј.", "РџРѕРјРёР»РєР°", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Перевірка: чи введено парольну фразу
+            // РџРµСЂРµРІС–СЂРєР°: С‡Рё РІРІРµРґРµРЅРѕ РїР°СЂРѕР»СЊРЅСѓ С„СЂР°Р·Сѓ
             if (string.IsNullOrWhiteSpace(password))
             {
-                MessageBox.Show("Парольне слово не може бути порожнім.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("РџР°СЂРѕР»СЊРЅРµ СЃР»РѕРІРѕ РЅРµ РјРѕР¶Рµ Р±СѓС‚Рё РїРѕСЂРѕР¶РЅС–Рј.", "РџРѕРјРёР»РєР°", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             try
             {
-                // Зчитуємо дані з файлу
+                // Р—С‡РёС‚СѓС”РјРѕ РґР°РЅС– Р· С„Р°Р№Р»Сѓ
                 byte[] fileData = File.ReadAllBytes(filePath);
-                byte[] resultData = null; // Змінна для зберігання результату
+                byte[] resultData = null; // Р—РјС–РЅРЅР° РґР»СЏ Р·Р±РµСЂС–РіР°РЅРЅСЏ СЂРµР·СѓР»СЊС‚Р°С‚Сѓ
 
-                // Отримуємо вибраний алгоритм шифрування (якщо обрано)
+                // РћС‚СЂРёРјСѓС”РјРѕ РІРёР±СЂР°РЅРёР№ Р°Р»РіРѕСЂРёС‚Рј С€РёС„СЂСѓРІР°РЅРЅСЏ (СЏРєС‰Рѕ РѕР±СЂР°РЅРѕ)
                 var encryption = (this.encryption.Checked || decoding.Checked)
                     ? encryptionAlgorithms.FirstOrDefault(a => a.Name == shyfruvannya.SelectedItem?.ToString())
                     : null;
 
-                // Отримуємо вибраний алгоритм стиснення (якщо обрано)
+                // РћС‚СЂРёРјСѓС”РјРѕ РІРёР±СЂР°РЅРёР№ Р°Р»РіРѕСЂРёС‚Рј СЃС‚РёСЃРЅРµРЅРЅСЏ (СЏРєС‰Рѕ РѕР±СЂР°РЅРѕ)
                 var compression = (archiving.Checked || unzipping.Checked)
                     ? compressionAlgorithms.FirstOrDefault(a => a.Name == arkhivuvannya.SelectedItem?.ToString())
                     : null;
 
-                // Перевірка: чи знайдено вибраний алгоритм шифрування
+                // РџРµСЂРµРІС–СЂРєР°: С‡Рё Р·РЅР°Р№РґРµРЅРѕ РІРёР±СЂР°РЅРёР№ Р°Р»РіРѕСЂРёС‚Рј С€РёС„СЂСѓРІР°РЅРЅСЏ
                 if ((this.encryption.Checked || decoding.Checked) && encryption == null)
                 {
-                    MessageBox.Show("Не знайдено вибраного алгоритму шифрування.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("РќРµ Р·РЅР°Р№РґРµРЅРѕ РІРёР±СЂР°РЅРѕРіРѕ Р°Р»РіРѕСЂРёС‚РјСѓ С€РёС„СЂСѓРІР°РЅРЅСЏ.", "РџРѕРјРёР»РєР°", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                // Перевірка: чи знайдено вибраний алгоритм стиснення
+                // РџРµСЂРµРІС–СЂРєР°: С‡Рё Р·РЅР°Р№РґРµРЅРѕ РІРёР±СЂР°РЅРёР№ Р°Р»РіРѕСЂРёС‚Рј СЃС‚РёСЃРЅРµРЅРЅСЏ
                 if ((archiving.Checked || unzipping.Checked) && compression == null)
                 {
-                    MessageBox.Show("Не знайдено вибраного алгоритму архівування.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("РќРµ Р·РЅР°Р№РґРµРЅРѕ РІРёР±СЂР°РЅРѕРіРѕ Р°Р»РіРѕСЂРёС‚РјСѓ Р°СЂС…С–РІСѓРІР°РЅРЅСЏ.", "РџРѕРјРёР»РєР°", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                // Виконання обраних дій
-                if (this.encryption.Checked && archiving.Checked) // Шифрування + архівування
+                // Р’РёРєРѕРЅР°РЅРЅСЏ РѕР±СЂР°РЅРёС… РґС–Р№
+                if (this.encryption.Checked && archiving.Checked) // РЁРёС„СЂСѓРІР°РЅРЅСЏ + Р°СЂС…С–РІСѓРІР°РЅРЅСЏ
                 {
-                    if (label5.Text == "1") // Спочатку шифрування, потім стиснення
+                    if (label5.Text == "1") // РЎРїРѕС‡Р°С‚РєСѓ С€РёС„СЂСѓРІР°РЅРЅСЏ, РїРѕС‚С–Рј СЃС‚РёСЃРЅРµРЅРЅСЏ
                     {
-                        resultData = encryption.Encrypt(fileData, password); // Шифрування
-                        resultData = compression.Compress(resultData); // Стиснення
+                        resultData = encryption.Encrypt(fileData, password); // РЁРёС„СЂСѓРІР°РЅРЅСЏ
+                        resultData = compression.Compress(resultData); // РЎС‚РёСЃРЅРµРЅРЅСЏ
                     }
-                    else // Спочатку стиснення, потім шифрування
+                    else // РЎРїРѕС‡Р°С‚РєСѓ СЃС‚РёСЃРЅРµРЅРЅСЏ, РїРѕС‚С–Рј С€РёС„СЂСѓРІР°РЅРЅСЏ
                     {
-                        resultData = compression.Compress(fileData); // Стиснення
-                        resultData = encryption.Encrypt(resultData, password); // Шифрування
+                        resultData = compression.Compress(fileData); // РЎС‚РёСЃРЅРµРЅРЅСЏ
+                        resultData = encryption.Encrypt(resultData, password); // РЁРёС„СЂСѓРІР°РЅРЅСЏ
                     }
                 }
-                else if (decoding.Checked && unzipping.Checked) // Розшифрування + розархівування
+                else if (decoding.Checked && unzipping.Checked) // Р РѕР·С€РёС„СЂСѓРІР°РЅРЅСЏ + СЂРѕР·Р°СЂС…С–РІСѓРІР°РЅРЅСЏ
                 {
-                    if (label5.Text == "1") // Спочатку розшифрування, потім розархівування
+                    if (label5.Text == "1") // РЎРїРѕС‡Р°С‚РєСѓ СЂРѕР·С€РёС„СЂСѓРІР°РЅРЅСЏ, РїРѕС‚С–Рј СЂРѕР·Р°СЂС…С–РІСѓРІР°РЅРЅСЏ
                     {
-                        resultData = encryption.Decrypt(fileData, password); // Розшифрування
-                        resultData = compression.Decompress(resultData); // Розархівування
+                        resultData = encryption.Decrypt(fileData, password); // Р РѕР·С€РёС„СЂСѓРІР°РЅРЅСЏ
+                        resultData = compression.Decompress(resultData); // Р РѕР·Р°СЂС…С–РІСѓРІР°РЅРЅСЏ
                     }
-                    else // Спочатку розархівування, потім розшифрування
+                    else // РЎРїРѕС‡Р°С‚РєСѓ СЂРѕР·Р°СЂС…С–РІСѓРІР°РЅРЅСЏ, РїРѕС‚С–Рј СЂРѕР·С€РёС„СЂСѓРІР°РЅРЅСЏ
                     {
-                        resultData = compression.Decompress(fileData); // Розархівування
-                        resultData = encryption.Decrypt(resultData, password); // Розшифрування
+                        resultData = compression.Decompress(fileData); // Р РѕР·Р°СЂС…С–РІСѓРІР°РЅРЅСЏ
+                        resultData = encryption.Decrypt(resultData, password); // Р РѕР·С€РёС„СЂСѓРІР°РЅРЅСЏ
                     }
                 }
-                else if (this.encryption.Checked) // Тільки шифрування
+                else if (this.encryption.Checked) // РўС–Р»СЊРєРё С€РёС„СЂСѓРІР°РЅРЅСЏ
                 {
                     resultData = encryption.Encrypt(fileData, password);
                 }
-                else if (decoding.Checked) // Тільки розшифрування
+                else if (decoding.Checked) // РўС–Р»СЊРєРё СЂРѕР·С€РёС„СЂСѓРІР°РЅРЅСЏ
                 {
                     resultData = encryption.Decrypt(fileData, password);
                 }
-                else if (archiving.Checked) // Тільки стиснення
+                else if (archiving.Checked) // РўС–Р»СЊРєРё СЃС‚РёСЃРЅРµРЅРЅСЏ
                 {
                     resultData = compression.Compress(fileData);
                 }
-                else if (unzipping.Checked) // Тільки розархівування
+                else if (unzipping.Checked) // РўС–Р»СЊРєРё СЂРѕР·Р°СЂС…С–РІСѓРІР°РЅРЅСЏ
                 {
                     resultData = compression.Decompress(fileData);
                 }
 
-                // Збереження результату у файл
+                // Р—Р±РµСЂРµР¶РµРЅРЅСЏ СЂРµР·СѓР»СЊС‚Р°С‚Сѓ Сѓ С„Р°Р№Р»
                 string outputFilePath = Path.Combine(
                     Path.GetDirectoryName(filePath),
                     Path.GetFileNameWithoutExtension(filePath) + "_processed" + Path.GetExtension(filePath)
                 );
                 File.WriteAllBytes(outputFilePath, resultData);
 
-                // Повідомлення про успішну обробку
-                MessageBox.Show($"Файл успішно оброблено та збережено: {outputFilePath}", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // РџРѕРІС–РґРѕРјР»РµРЅРЅСЏ РїСЂРѕ СѓСЃРїС–С€РЅСѓ РѕР±СЂРѕР±РєСѓ
+                MessageBox.Show($"Р¤Р°Р№Р» СѓСЃРїС–С€РЅРѕ РѕР±СЂРѕР±Р»РµРЅРѕ С‚Р° Р·Р±РµСЂРµР¶РµРЅРѕ: {outputFilePath}", "РЈСЃРїС–С…", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                // Повідомлення про помилку
-                MessageBox.Show($"Сталася помилка: {ex.Message}", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // РџРѕРІС–РґРѕРјР»РµРЅРЅСЏ РїСЂРѕ РїРѕРјРёР»РєСѓ
+                MessageBox.Show($"РЎС‚Р°Р»Р°СЃСЏ РїРѕРјРёР»РєР°: {ex.Message}", "РџРѕРјРёР»РєР°", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void change_Click(object sender, EventArgs e)
         {
-            // Читаємо значення лейблів
+            // Р§РёС‚Р°С”РјРѕ Р·РЅР°С‡РµРЅРЅСЏ Р»РµР№Р±Р»С–РІ
             string label5Text = label5.Text;
             string label6Text = label6.Text;
 
-            // Міняємо значення між 1 і 2
+            // РњС–РЅСЏС”РјРѕ Р·РЅР°С‡РµРЅРЅСЏ РјС–Р¶ 1 С– 2
             if (label5Text == "1" && label6Text == "2")
             {
                 label5.Text = "2";
